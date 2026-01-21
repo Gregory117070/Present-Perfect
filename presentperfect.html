@@ -1,0 +1,1036 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprende Presente Perfecto con Jorge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .avatar {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        
+        .avatar-circle {
+            width: 100%;
+            height: 100%;
+            background: #f0d5b8;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid #764ba2;
+        }
+        
+        .hair {
+            position: absolute;
+            top: 0;
+            left: 20%;
+            width: 60%;
+            height: 40%;
+            background: #2c3e50;
+            border-radius: 50% 50% 0 0;
+        }
+        
+        .eyes {
+            position: absolute;
+            top: 45%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+        
+        .eye {
+            width: 12px;
+            height: 12px;
+            background: #000;
+            border-radius: 50%;
+        }
+        
+        .mouth {
+            position: absolute;
+            top: 65%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 5px;
+            border: 2px solid #c44;
+            background: #c44;
+            border-radius: 10px;
+            transition: all 0.1s;
+        }
+        
+        .avatar-circle.talking .mouth {
+            animation: talk 0.2s infinite;
+        }
+
+        @keyframes talk {
+            0%, 100% { height: 5px; border-radius: 10px; }
+            50% { height: 15px; border-radius: 50%; }
+        }
+        
+        .score {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .score-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkmark { color: #22c55e; }
+        .cross { color: #ef4444; }
+        
+        .greeting {
+            background: #334155;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 18px;
+        }
+
+        .audio-text {
+            display: block;
+            font-size: 14px;
+            color: #94a3b8;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .btn-primary {
+            width: 100%;
+            padding: 18px;
+            background: #764ba2;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .btn-primary:hover {
+            background: #6b4199;
+            transform: translateY(-2px);
+        }
+        
+        .theory-section, .verbs-section, .practice-section {
+            display: none;
+        }
+        
+        .theory-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .theory-tab {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+        
+        .theory-tab.active {
+            color: #764ba2;
+            border-bottom-color: #764ba2;
+        }
+        
+        .theory-content {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .grammar-box {
+            background: #e0e7ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .formula {
+            background: #fef3c7;
+            padding: 10px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .example {
+            background: #dcfce7;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .example:hover {
+            background-color: #bbf7d0;
+        }
+
+        .english-text {
+            color: #1e40af;
+            font-weight: 600;
+        }
+        
+        .verb-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        .verb-tab {
+            padding: 10px 20px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+        
+        .verb-tab.active {
+            color: #764ba2;
+            border-bottom-color: #764ba2;
+        }
+        
+        .verb-content {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            max-height: 450px;
+            overflow-y: auto;
+        }
+        
+        .verb-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .verb-table th {
+            background: #764ba2;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .verb-table td {
+            padding: 12px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .verb-table tr:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .pronunciation {
+            cursor: pointer;
+            color: #764ba2;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .pronunciation:hover {
+            text-decoration: underline;
+        }
+        
+        .question-audio {
+            background: #dbeafe;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3b82f6;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .question-audio:hover {
+            background-color: #bfdbfe;
+        }
+        
+        .option {
+            padding: 15px 20px;
+            background: white;
+            border: 2px solid #cbd5e1;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: all 0.2s;
+        }
+        
+        .option:hover { 
+            border-color: #764ba2; 
+            background-color: #f5f3ff;
+        }
+        
+        .option.correct { 
+            background: #dcfce7; 
+            border-color: #22c55e; 
+        }
+        
+        .option.incorrect { 
+            background: #fee2e2; 
+            border-color: #ef4444; 
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            display: none;
+        }
+
+        .btn-next {
+            width: 100%;
+            padding: 15px;
+            background: #22c55e;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            display: none;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-next:hover {
+            background-color: #16a34a;
+        }
+
+        .btn-back {
+            width: 100%;
+            padding: 10px;
+            background: #64748b;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-back:hover {
+            background-color: #475569;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e2e8f0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #764ba2;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .result-container {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .result-title {
+            font-size: 24px;
+            color: #334155;
+            margin-bottom: 20px;
+        }
+        
+        .result-score {
+            font-size: 48px;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+        
+        .result-message {
+            font-size: 18px;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+        
+        .verb-count {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: #764ba2;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="welcome-screen">
+            <div class="avatar">
+                <div class="avatar-circle" id="jorge-avatar">
+                    <div class="hair"></div>
+                    <div class="eyes"><div class="eye"></div><div class="eye"></div></div>
+                    <div class="mouth"></div>
+                </div>
+            </div>
+            
+            <div class="score">
+                <div class="score-item"><span class="checkmark">✓</span><span id="correct-count">0</span></div>
+                <div class="score-item"><span class="cross">✗</span><span id="incorrect-count">0</span></div>
+            </div>
+            
+            <div class="greeting">
+                ¡Hola! Soy Jorge Ñañez. Hoy aprenderemos el Presente Perfecto y el Presente Perfecto Continuo.
+                <span class="audio-text">🎧 "Hello! I am Jorge Ñañez. Today we will learn the Present Perfect and Present Perfect Continuous."</span>
+            </div>
+            <button class="btn-primary" onclick="showTheory()">Ver Teoría</button>
+        </div>
+
+        <div id="theory-screen" class="theory-section">
+            <h2 class="section-title">Presente Perfecto y Presente Perfecto Continuo</h2>
+            
+            <div class="theory-tabs">
+                <button class="theory-tab active" onclick="showTheoryType('perfect')">Presente Perfecto</button>
+                <button class="theory-tab" onclick="showTheoryType('continuous')">Presente Perfecto Continuo</button>
+            </div>
+            
+            <div id="perfect-theory" class="theory-content">
+                <div class="grammar-box">
+                    <h3>Present Perfect Simple</h3>
+                    <p><strong>Uso:</strong> Acciones que comenzaron en el pasado y continúan hasta el presente, o acciones pasadas con resultado en el presente.</p>
+                    <p><strong>Traducción:</strong> He/has + participio pasado</p>
+                </div>
+                
+                <div class="formula">
+                    Sujeto + have/has + Participio Pasado
+                </div>
+                
+                <h4>Estructuras:</h4>
+                <div class="example" onclick="speak('I have finished my homework')">
+                    <strong>Afirmativa:</strong> I have finished my homework<br>
+                    <span class="english-text">"He terminado mi tarea"</span>
+                </div>
+                
+                <div class="example" onclick="speak('She has traveled to Japan')">
+                    <strong>Afirmativa:</strong> She has traveled to Japan<br>
+                    <span class="english-text">"Ella ha viajado a Japón"</span>
+                </div>
+                
+                <div class="example" onclick="speak('Have you seen this movie?')">
+                    <strong>Interrogativa:</strong> Have you seen this movie?<br>
+                    <span class="english-text">"¿Has visto esta película?"</span>
+                </div>
+                
+                <div class="example" onclick="speak('Has he arrived yet?')">
+                    <strong>Interrogativa:</strong> Has he arrived yet?<br>
+                    <span class="english-text">"¿Ha llegado él ya?"</span>
+                </div>
+                
+                <div class="example" onclick="speak('I have not eaten breakfast')">
+                    <strong>Negativa:</strong> I have not eaten breakfast<br>
+                    <span class="english-text">"No he desayunado"</span>
+                </div>
+                
+                <div class="example" onclick="speak('She has not completed the project')">
+                    <strong>Negativa:</strong> She has not completed the project<br>
+                    <span class="english-text">"Ella no ha completado el proyecto"</span>
+                </div>
+                
+                <h4>Señales de tiempo:</h4>
+                <p>• <strong>For</strong> (durante un período): I have lived here for five years.</p>
+                <p>• <strong>Since</strong> (desde un punto): I have worked here since 2019.</p>
+                <p>• <strong>Already</strong> (ya): She has already left.</p>
+                <p>• <strong>Yet</strong> (ya/negativa): I haven't finished yet.</p>
+                <p>• <strong>Just</strong> (acabar de): They have just arrived.</p>
+                <p>• <strong>Ever</strong> (alguna vez): Have you ever been to Paris?</p>
+                <p>• <strong>Never</strong> (nunca): I have never tried sushi.</p>
+            </div>
+            
+            <div id="continuous-theory" class="theory-content" style="display: none;">
+                <div class="grammar-box">
+                    <h3>Present Perfect Continuous</h3>
+                    <p><strong>Uso:</strong> Acciones que comenzaron en el pasado y continúan hasta el presente, enfocándose en la duración.</p>
+                    <p><strong>Traducción:</strong> Llevo + gerundio / He estado + gerundio</p>
+                </div>
+                
+                <div class="formula">
+                    Sujeto + have/has + been + Gerundio (-ing)
+                </div>
+                
+                <h4>Estructuras:</h4>
+                <div class="example" onclick="speak('I have been studying for three hours')">
+                    <strong>Afirmativa:</strong> I have been studying for three hours<br>
+                    <span class="english-text">"Llevo tres horas estudiando"</span>
+                </div>
+                
+                <div class="example" onclick="speak('She has been working since morning')">
+                    <strong>Afirmativa:</strong> She has been working since morning<br>
+                    <span class="english-text">"Ella ha estado trabajando desde la mañana"</span>
+                </div>
+                
+                <div class="example" onclick="speak('Have you been waiting long?')">
+                    <strong>Interrogativa:</strong> Have you been waiting long?<br>
+                    <span class="english-text">"¿Llevas mucho tiempo esperando?"</span>
+                </div>
+                
+                <div class="example" onclick="speak('Has he been exercising regularly?')">
+                    <strong>Interrogativa:</strong> Has he been exercising regularly?<br>
+                    <span class="english-text">"¿Ha estado haciendo ejercicio regularmente?"</span>
+                </div>
+                
+                <div class="example" onclick="speak('I have not been feeling well')">
+                    <strong>Negativa:</strong> I have not been feeling well<br>
+                    <span class="english-text">"No me he estado sintiendo bien"</span>
+                </div>
+                
+                <div class="example" onclick="speak('She has not been sleeping enough')">
+                    <strong>Negativa:</strong> She has not been sleeping enough<br>
+                    <span class="english-text">"Ella no ha estado durmiendo lo suficiente"</span>
+                </div>
+                
+                <h4>Señales de tiempo:</h4>
+                <p>• <strong>For</strong> (durante un período): I have been waiting for two hours.</p>
+                <p>• <strong>Since</strong> (desde un punto): She has been practicing since Monday.</p>
+                <p>• <strong>All day/morning/week</strong>: They have been playing all morning.</p>
+                <p>• <strong>Lately</strong>: I have been feeling tired lately.</p>
+                <p>• <strong>Recently</strong>: Have you been exercising recently?</p>
+            </div>
+            
+            <button class="btn-primary" onclick="showVerbs()">Ver Verbos</button>
+            <button class="btn-back" onclick="location.reload()">Inicio</button>
+        </div>
+
+        <div id="verbs-screen" class="verbs-section">
+            <h2 class="section-title">Verbos para Practicar</h2>
+            
+            <div class="verb-tabs">
+                <button class="verb-tab active" onclick="showVerbType('participle')">Pasado Participio</button>
+                <button class="verb-tab" onclick="showVerbType('continuous')">Gerundio (-ing)</button>
+            </div>
+            
+            <div id="participle-verbs" class="verb-content">
+                <div class="verb-count">40 verbos en pasado participio</div>
+                <table class="verb-table">
+                    <thead>
+                        <tr>
+                            <th>Infinitivo</th>
+                            <th>Pasado Participio</th>
+                            <th>Pronunciación</th>
+                            <th>Traducción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="participle-verbs-list"></tbody>
+                </table>
+            </div>
+            
+            <div id="continuous-verbs" class="verb-content" style="display: none;">
+                <div class="verb-count">40 verbos en gerundio (-ing)</div>
+                <table class="verb-table">
+                    <thead>
+                        <tr>
+                            <th>Infinitivo</th>
+                            <th>Gerundio (-ing)</th>
+                            <th>Pronunciación</th>
+                            <th>Traducción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="continuous-verbs-list"></tbody>
+                </table>
+            </div>
+            
+            <button class="btn-primary" onclick="startPractice()">Comenzar Práctica</button>
+            <button class="btn-back" onclick="showTheory()">Volver a Teoría</button>
+        </div>
+
+        <div id="practice-screen" class="practice-section">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div id="progress" style="text-align:center; margin-bottom:10px;"></div>
+            <div id="question-container"></div>
+            <button class="btn-next" id="next-btn" onclick="nextQuestion()">Siguiente Pregunta</button>
+        </div>
+        
+        <div id="result-screen" class="practice-section">
+            <div class="result-container">
+                <div class="result-title">¡Has completado el cuestionario!</div>
+                <div class="result-score" id="final-score"></div>
+                <div class="result-message" id="result-message"></div>
+                <button class="btn-primary" onclick="location.reload()">Volver al Inicio</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const participleVerbs = [
+            {infinitive: "be", participle: "been", pronunciation: "biːn", translation: "ser/estar"},
+            {infinitive: "begin", participle: "begun", pronunciation: "bɪˈɡʌn", translation: "empezar"},
+            {infinitive: "break", participle: "broken", pronunciation: "ˈbrəʊkən", translation: "romper"},
+            {infinitive: "bring", participle: "brought", pronunciation: "brɔːt", translation: "traer"},
+            {infinitive: "build", participle: "built", pronunciation: "bɪlt", translation: "construir"},
+            {infinitive: "buy", participle: "bought", pronunciation: "bɔːt", translation: "comprar"},
+            {infinitive: "catch", participle: "caught", pronunciation: "kɔːt", translation: "atrapar"},
+            {infinitive: "choose", participle: "chosen", pronunciation: "ˈtʃəʊzən", translation: "elegir"},
+            {infinitive: "come", participle: "come", pronunciation: "kʌm", translation: "venir"},
+            {infinitive: "do", participle: "done", pronunciation: "dʌn", translation: "hacer"},
+            {infinitive: "drink", participle: "drunk", pronunciation: "drʌŋk", translation: "beber"},
+            {infinitive: "drive", participle: "driven", pronunciation: "ˈdrɪvən", translation: "conducir"},
+            {infinitive: "eat", participle: "eaten", pronunciation: "ˈiːtən", translation: "comer"},
+            {infinitive: "fall", participle: "fallen", pronunciation: "ˈfɔːlən", translation: "caer"},
+            {infinitive: "find", participle: "found", pronunciation: "faʊnd", translation: "encontrar"},
+            {infinitive: "fly", participle: "flown", pronunciation: "fləʊn", translation: "volar"},
+            {infinitive: "forget", participle: "forgotten", pronunciation: "fəˈɡɒtən", translation: "olvidar"},
+            {infinitive: "get", participle: "gotten", pronunciation: "ˈɡɒtən", translation: "conseguir"},
+            {infinitive: "give", participle: "given", pronunciation: "ˈɡɪvən", translation: "dar"},
+            {infinitive: "go", participle: "gone", pronunciation: "ɡɒn", translation: "ir"},
+            {infinitive: "grow", participle: "grown", pronunciation: "ɡrəʊn", translation: "crecer"},
+            {infinitive: "have", participle: "had", pronunciation: "hæd", translation: "tener"},
+            {infinitive: "hear", participle: "heard", pronunciation: "hɜːd", translation: "oír"},
+            {infinitive: "hide", participle: "hidden", pronunciation: "ˈhɪdən", translation: "esconder"},
+            {infinitive: "keep", participle: "kept", pronunciation: "kept", translation: "mantener"},
+            {infinitive: "know", participle: "known", pronunciation: "nəʊn", translation: "saber"},
+            {infinitive: "leave", participle: "left", pronunciation: "left", translation: "dejar"},
+            {infinitive: "lose", participle: "lost", pronunciation: "lɒst", translation: "perder"},
+            {infinitive: "make", participle: "made", pronunciation: "meɪd", translation: "hacer"},
+            {infinitive: "meet", participle: "met", pronunciation: "met", translation: "conocer"},
+            {infinitive: "pay", participle: "paid", pronunciation: "peɪd", translation: "pagar"},
+            {infinitive: "read", participle: "read", pronunciation: "red", translation: "leer"},
+            {infinitive: "ride", participle: "ridden", pronunciation: "ˈrɪdən", translation: "montar"},
+            {infinitive: "ring", participle: "rung", pronunciation: "rʌŋ", translation: "sonar"},
+            {infinitive: "run", participle: "run", pronunciation: "rʌn", translation: "correr"},
+            {infinitive: "say", participle: "said", pronunciation: "sed", translation: "decir"},
+            {infinitive: "see", participle: "seen", pronunciation: "siːn", translation: "ver"},
+            {infinitive: "sell", participle: "sold", pronunciation: "səʊld", translation: "vender"},
+            {infinitive: "send", participle: "sent", pronunciation: "sent", translation: "enviar"},
+            {infinitive: "sing", participle: "sung", pronunciation: "sʌŋ", translation: "cantar"},
+            {infinitive: "sit", participle: "sat", pronunciation: "sæt", translation: "sentarse"},
+            {infinitive: "sleep", participle: "slept", pronunciation: "slept", translation: "dormir"},
+            {infinitive: "speak", participle: "spoken", pronunciation: "ˈspəʊkən", translation: "hablar"},
+            {infinitive: "spend", participle: "spent", pronunciation: "spent", translation: "gastar"},
+            {infinitive: "stand", participle: "stood", pronunciation: "stʊd", translation: "estar de pie"},
+            {infinitive: "swim", participle: "swum", pronunciation: "swʌm", translation: "nadar"},
+            {infinitive: "take", participle: "taken", pronunciation: "ˈteɪkən", translation: "tomar"},
+            {infinitive: "teach", participle: "taught", pronunciation: "tɔːt", translation: "enseñar"},
+            {infinitive: "tell", participle: "told", pronunciation: "təʊld", translation: "contar"},
+            {infinitive: "think", participle: "thought", pronunciation: "θɔːt", translation: "pensar"},
+            {infinitive: "understand", participle: "understood", pronunciation: "ˌʌndəˈstʊd", translation: "entender"},
+            {infinitive: "wake", participle: "woken", pronunciation: "ˈwəʊkən", translation: "despertar"},
+            {infinitive: "wear", participle: "worn", pronunciation: "wɔːn", translation: "llevar"},
+            {infinitive: "win", participle: "won", pronunciation: "wʌn", translation: "ganar"},
+            {infinitive: "write", participle: "written", pronunciation: "ˈrɪtən", translation: "escribir"}
+        ];
+
+        const continuousVerbs = [
+            {infinitive: "ask", gerund: "asking", pronunciation: "ˈɑːskɪŋ", translation: "preguntar"},
+            {infinitive: "call", gerund: "calling", pronunciation: "ˈkɔːlɪŋ", translation: "llamar"},
+            {infinitive: "clean", gerund: "cleaning", pronunciation: "ˈkliːnɪŋ", translation: "limpiar"},
+            {infinitive: "cook", gerund: "cooking", pronunciation: "ˈkʊkɪŋ", translation: "cocinar"},
+            {infinitive: "dance", gerund: "dancing", pronunciation: "ˈdænsɪŋ", translation: "bailar"},
+            {infinitive: "draw", gerund: "drawing", pronunciation: "ˈdrɔːɪŋ", translation: "dibujar"},
+            {infinitive: "drive", gerund: "driving", pronunciation: "ˈdraɪvɪŋ", translation: "conducir"},
+            {infinitive: "eat", gerund: "eating", pronunciation: "ˈiːtɪŋ", translation: "comer"},
+            {infinitive: "enjoy", gerund: "enjoying", pronunciation: "ɪnˈdʒɔɪɪŋ", translation: "disfrutar"},
+            {infinitive: "exercise", gerund: "exercising", pronunciation: "ˈeksəsaɪzɪŋ", translation: "hacer ejercicio"},
+            {infinitive: "feel", gerund: "feeling", pronunciation: "ˈfiːlɪŋ", translation: "sentir"},
+            {infinitive: "fight", gerund: "fighting", pronunciation: "ˈfaɪtɪŋ", translation: "pelear"},
+            {infinitive: "finish", gerund: "finishing", pronunciation: "ˈfɪnɪʃɪŋ", translation: "terminar"},
+            {infinitive: "fly", gerund: "flying", pronunciation: "ˈflaɪɪŋ", translation: "volar"},
+            {infinitive: "go", gerund: "going", pronunciation: "ˈɡəʊɪŋ", translation: "ir"},
+            {infinitive: "help", gerund: "helping", pronunciation: "ˈhelpɪŋ", translation: "ayudar"},
+            {infinitive: "hope", gerund: "hoping", pronunciation: "ˈhəʊpɪŋ", translation: "esperar"},
+            {infinitive: "jump", gerund: "jumping", pronunciation: "ˈdʒʌmpɪŋ", translation: "saltar"},
+            {infinitive: "laugh", gerund: "laughing", pronunciation: "ˈlɑːfɪŋ", translation: "reír"},
+            {infinitive: "learn", gerund: "learning", pronunciation: "ˈlɜːnɪŋ", translation: "aprender"},
+            {infinitive: "listen", gerund: "listening", pronunciation: "ˈlɪsənɪŋ", translation: "escuchar"},
+            {infinitive: "live", gerund: "living", pronunciation: "ˈlɪvɪŋ", translation: "vivir"},
+            {infinitive: "look", gerund: "looking", pronunciation: "ˈlʊkɪŋ", translation: "mirar"},
+            {infinitive: "love", gerund: "loving", pronunciation: "ˈlʌvɪŋ", translation: "amar"},
+            {infinitive: "make", gerund: "making", pronunciation: "ˈmeɪkɪŋ", translation: "hacer"},
+            {infinitive: "paint", gerund: "painting", pronunciation: "ˈpeɪntɪŋ", translation: "pintar"},
+            {infinitive: "play", gerund: "playing", pronunciation: "ˈpleɪɪŋ", translation: "jugar"},
+            {infinitive: "read", gerund: "reading", pronunciation: "ˈriːdɪŋ", translation: "leer"},
+            {infinitive: "relax", gerund: "relaxing", pronunciation: "rɪˈlæksɪŋ", translation: "relajarse"},
+            {infinitive: "run", gerund: "running", pronunciation: "ˈrʌnɪŋ", translation: "correr"},
+            {infinitive: "say", gerund: "saying", pronunciation: "ˈseɪɪŋ", translation: "decir"},
+            {infinitive: "see", gerund: "seeing", pronunciation: "ˈsiːɪŋ", translation: "ver"},
+            {infinitive: "sing", gerund: "singing", pronunciation: "ˈsɪŋɪŋ", translation: "cantar"},
+            {infinitive: "sit", gerund: "sitting", pronunciation: "ˈsɪtɪŋ", translation: "sentarse"},
+            {infinitive: "sleep", gerund: "sleeping", pronunciation: "ˈsliːpɪŋ", translation: "dormir"},
+            {infinitive: "speak", gerund: "speaking", pronunciation: "ˈspiːkɪŋ", translation: "hablar"},
+            {infinitive: "stand", gerund: "standing", pronunciation: "ˈstændɪŋ", translation: "estar de pie"},
+            {infinitive: "study", gerund: "studying", pronunciation: "ˈstʌdiɪŋ", translation: "estudiar"},
+            {infinitive: "swim", gerund: "swimming", pronunciation: "ˈswɪmɪŋ", translation: "nadar"},
+            {infinitive: "talk", gerund: "talking", pronunciation: "ˈtɔːkɪŋ", translation: "hablar"},
+            {infinitive: "travel", gerund: "traveling", pronunciation: "ˈtrævəlɪŋ", translation: "viajar"},
+            {infinitive: "wait", gerund: "waiting", pronunciation: "ˈweɪtɪŋ", translation: "esperar"},
+            {infinitive: "walk", gerund: "walking", pronunciation: "ˈwɔːkɪŋ", translation: "caminar"},
+            {infinitive: "watch", gerund: "watching", pronunciation: "ˈwɒtʃɪŋ", translation: "ver"},
+            {infinitive: "work", gerund: "working", pronunciation: "ˈwɜːkɪŋ", translation: "trabajar"},
+            {infinitive: "write", gerund: "writing", pronunciation: "ˈraɪtɪŋ", translation: "escribir"}
+        ];
+
+        // Generar preguntas variadas
+        function generateQuestions() {
+            const questions = [];
+            const subjects = ['I', 'You', 'He', 'She', 'It', 'We', 'They'];
+            const timeExpressions = ['for two hours', 'since morning', 'all day', 'recently', 'lately', 'for a long time'];
+            
+            // Seleccionar verbos aleatorios
+            const selectedParticipleVerbs = [...participleVerbs].sort(() => 0.5 - Math.random()).slice(0, 20);
+            const selectedContinuousVerbs = [...continuousVerbs].sort(() => 0.5 - Math.random()).slice(0, 20);
+            
+            // Preguntas de Presente Perfecto Simple
+            selectedParticipleVerbs.forEach((verb, index) => {
+                const subject = subjects[index % subjects.length];
+                const timeExpr = timeExpressions[index % timeExpressions.length];
+                
+                // Afirmativa
+                questions.push({
+                    q: `Completa la frase: "${subject} ___ ${verb.participle} the report."`,
+                    opts: ['have', 'has', 'is', 'are'],
+                    answer: subject === 'He' || subject === 'She' || subject === 'It' ? 'has' : 'have',
+                    audio: `${subject} ${subject === 'He' || subject === 'She' || subject === 'It' ? 'has' : 'have'} ${verb.participle} the report.`,
+                    translation: `He/has ${verb.translation} el reporte.`
+                });
+                
+                // Negativa
+                questions.push({
+                    q: `Completa la frase: "${subject} ___ not ${verb.participle} yet."`,
+                    opts: ['have', 'has', 'is', 'are'],
+                    answer: subject === 'He' || subject === 'She' || subject === 'It' ? 'has' : 'have',
+                    audio: `${subject} ${subject === 'He' || subject === 'She' || subject === 'It' ? 'has' : 'have'} not ${verb.participle} yet.`,
+                    translation: `No he/has ${verb.translation} aún.`
+                });
+                
+                // Interrogativa
+                questions.push({
+                    q: `Completa la pregunta: "___ you ${verb.participle} your homework?"`,
+                    opts: ['Have', 'Has', 'Is', 'Are'],
+                    answer: 'Have',
+                    audio: `Have you ${verb.participle} your homework?`,
+                    translation: `¿Has ${verb.translation} tu tarea?`
+                });
+            });
+            
+            // Preguntas de Presente Perfecto Continuo
+            selectedContinuousVerbs.forEach((verb, index) => {
+                const subject = subjects[index % subjects.length];
+                const timeExpr = timeExpressions[index % timeExpressions.length];
+                
+                // Afirmativa
+                questions.push({
+                    q: `Completa la frase: "${subject} ___ been ${verb.gerund} ${timeExpr}."`,
+                    opts: ['have', 'has', 'is', 'are'],
+                    answer: subject === 'He' || subject === 'She' || subject === 'It' ? 'has' : 'have',
+                    audio: `${subject} ${subject === 'He' || subject === 'She' || subject === 'It' ? 'has' : 'have'} been ${verb.gerund} ${timeExpr}.`,
+                    translation: `Llevo/ha estado ${verb.translation} ${timeExpr}.`
+                });
+                
+                // Negativa
+                questions.push({
+                    q: `Completa la frase: "${subject} ___ not been ${verb.gerund} lately."`,
+                    opts: ['have', 'has', 'is', 'are'],
+                    answer: subject === 'He' || subject === 'She' || subject === 'It' ? 'has' : 'have',
+                    audio: `${subject} ${subject === 'He' || subject === 'She' || subject === 'It' ? 'has' : 'have'} not been ${verb.gerund} lately.`,
+                    translation: `No he/ha estado ${verb.translation} últimamente.`
+                });
+                
+                // Interrogativa
+                questions.push({
+                    q: `Completa la pregunta: "___ ${subject} been ${verb.gerund} since morning?"`,
+                    opts: ['Have', 'Has', 'Is', 'Are'],
+                    answer: subject === 'He' || subject === 'She' || subject === 'It' ? 'Has' : 'Have',
+                    audio: `${subject === 'He' || subject === 'She' || subject === 'It' ? 'Has' : 'Have'} ${subject} been ${verb.gerund} since morning?`,
+                    translation: `¿Ha/he estado ${verb.translation} desde la mañana?`
+                });
+            });
+            
+            // Barajar preguntas
+            return questions.sort(() => 0.5 - Math.random()).slice(0, 30);
+        }
+
+        const questions = generateQuestions();
+
+        let currentQuestion = 0;
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let answered = false;
+        let currentCorrectIndex = -1;
+
+        // --- MOTOR DE AUDIO ---
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.9;
+            
+            const avatar = document.getElementById('jorge-avatar');
+            utterance.onstart = () => avatar.classList.add('talking');
+            utterance.onend = () => avatar.classList.remove('talking');
+            
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function showTheory() {
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('theory-screen').style.display = 'block';
+            speak("Hello! I am Jorge. Let's study the Present Perfect and Present Perfect Continuous tenses.");
+        }
+
+        function showTheoryType(type) {
+            const tabs = document.querySelectorAll('.theory-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            if (type === 'perfect') {
+                tabs[0].classList.add('active');
+                document.getElementById('perfect-theory').style.display = 'block';
+                document.getElementById('continuous-theory').style.display = 'none';
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('perfect-theory').style.display = 'none';
+                document.getElementById('continuous-theory').style.display = 'block';
+            }
+        }
+
+        function showVerbs() {
+            document.getElementById('theory-screen').style.display = 'none';
+            document.getElementById('verbs-screen').style.display = 'block';
+            
+            loadParticipleVerbs();
+            loadContinuousVerbs();
+            
+            speak("Let's review the verbs we will use for practice.");
+        }
+
+        function loadParticipleVerbs() {
+            const tbody = document.getElementById('participle-verbs-list');
+            tbody.innerHTML = '';
+            
+            participleVerbs.forEach(verb => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${verb.infinitive}</td>
+                    <td>
+                        <span class="pronunciation" onclick="speak('${verb.participle}')">🔊 ${verb.participle}</span>
+                    </td>
+                    <td><small>[${verb.pronunciation}]</small></td>
+                    <td>${verb.translation}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function loadContinuousVerbs() {
+            const tbody = document.getElementById('continuous-verbs-list');
+            tbody.innerHTML = '';
+            
+            continuousVerbs.forEach(verb => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${verb.infinitive}</td>
+                    <td>
+                        <span class="pronunciation" onclick="speak('${verb.gerund}')">🔊 ${verb.gerund}</span>
+                    </td>
+                    <td><small>[${verb.pronunciation}]</small></td>
+                    <td>${verb.translation}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function showVerbType(type) {
+            const tabs = document.querySelectorAll('.verb-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            if (type === 'participle') {
+                tabs[0].classList.add('active');
+                document.getElementById('participle-verbs').style.display = 'block';
+                document.getElementById('continuous-verbs').style.display = 'none';
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('participle-verbs').style.display = 'none';
+                document.getElementById('continuous-verbs').style.display = 'block';
+            }
+        }
+
+        function startPractice() {
+            document.getElementById('verbs-screen').style.display = 'none';
+            document.getElementById('practice-screen').style.display = 'block';
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            answered = false;
+            const q = questions[currentQuestion];
+            const container = document.getElementById('question-container');
+            
+            // Barajar opciones
+            let optionsWithCorrectFlag = q.opts.map(opt => ({
+                text: opt,
+                isCorrect: opt === q.answer
+            }));
+
+            for (let i = optionsWithCorrectFlag.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [optionsWithCorrectFlag[i], optionsWithCorrectFlag[j]] = [optionsWithCorrectFlag[j], optionsWithCorrectFlag[i]];
+            }
+            
+            currentCorrectIndex = optionsWithCorrectFlag.findIndex(opt => opt.isCorrect);
+            
+            container.innerHTML = `
+                <div class="question-audio" onclick="speak(questions[currentQuestion].audio)">
+                    <p>🎧 <strong>Jorge dice:</strong> (Haz clic para escuchar)</p>
+                </div>
+                <div style="font-size:1.2rem; margin-bottom:20px;">${q.q}</div>
+                <div style="font-size:0.9rem; color: #64748b; margin-bottom:15px;">
+                    <em>Traducción: ${q.translation}</em>
+                </div>
+                <div id="options-list"></div>
+                <div class="feedback" id="feedback"></div>
+            `;
+            
+            optionsWithCorrectFlag.forEach((opt, i) => {
+                const div = document.createElement('div');
+                div.className = 'option';
+                div.textContent = opt.text;
+                div.onclick = () => selectAnswer(i);
+                document.getElementById('options-list').appendChild(div);
+            });
+            
+            speak(q.audio);
+            document.getElementById('progress').textContent = `Pregunta ${currentQuestion + 1} de ${questions.length}`;
+            updateProgressBar();
+            document.getElementById('next-btn').style.display = 'none';
+        }
+        
+        function updateProgressBar() {
+            const progressPercent = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progressPercent}%`;
+        }
+
+        function selectAnswer(selected) {
+            if (answered) return;
+            answered = true;
+            
+            const options = document.querySelectorAll('.option');
+            const feedback = document.getElementById('feedback');
+            
+            if (selected === currentCorrectIndex) {
+                options[selected].classList.add('correct');
+                correctCount++;
+                document.getElementById('correct-count').textContent = correctCount;
+                feedback.innerHTML = "✅ ¡Excelente! Correct answer.";
+                feedback.style.backgroundColor = "#dcfce7";
+                feedback.style.color = "#166534";
+                speak("Excellent! That is correct.");
+            } else {
+                options[selected].classList.add('incorrect');
+                options[currentCorrectIndex].classList.add('correct');
+                incorrectCount++;
+                document.getElementById('incorrect-count').textContent = incorrectCount;
+                feedback.innerHTML = "❌ No es correcto. La respuesta correcta está resaltada.";
+                feedback.style.backgroundColor = "#fee2e2";
+                feedback.style.color = "#991b1b";
+                speak("Not quite. Listen to the correct answer.");
+            }
+            
+            feedback.style.display = 'block';
+            document.getElementById('next-btn').style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+        
+        function showResults() {
+            document.getElementById('practice-screen').style.display = 'none';
+            document.getElementById('result-screen').style.display = 'block';
+            
+            const percentage = Math.round((correctCount / questions.length) * 100);
+            document.getElementById('final-score').textContent = `${percentage}%`;
+            
+            let message = "";
+            if (percentage >= 90) {
+                message = "¡Excelente trabajo! Tienes un dominio muy bueno del Presente Perfecto.";
+            } else if (percentage >= 70) {
+                message = "¡Buen trabajo! Has comprendido la mayoría de las estructuras.";
+            } else if (percentage >= 50) {
+                message = "Has aprobado, pero te recomiendo repasar un poco más.";
+            } else {
+                message = "Necesitas practicar más el Presente Perfecto. ¡No te rindas!";
+            }
+            
+            document.getElementById('result-message').textContent = message;
+            speak("You have finished the practice! Great job.");
+        }
+    </script>
+</body>
+</html>
